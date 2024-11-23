@@ -13,21 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const factsList = document.getElementById('facts-list');
+    const randomFactButton = document.getElementById('random-fact-button');
 
-    facts.forEach((fact, index) => {
+    // Function to display a random fact
+    function showRandomFact() {
+        // Clear the current list
+        factsList.innerHTML = '';
+
+        // Get a random fact
+        const randomIndex = Math.floor(Math.random() * facts.length);
+        const randomFact = facts[randomIndex];
+
+        // Create a new list item for the random fact
         const listItem = document.createElement('li');
-        listItem.textContent = `Fact ${index + 1}`;
-        listItem.addEventListener('click', () => {
-            const detail = listItem.querySelector('.detail');
-            if (detail) {
-                detail.classList.toggle('hidden');
-            } else {
-                const detail = document.createElement('div');
-                detail.textContent = fact;
-                detail.classList.add('detail');
-                listItem.appendChild(detail);
-            }
-        });
+        listItem.textContent = randomFact;
         factsList.appendChild(listItem);
-    });
+    }
+
+    // Add event listener to the button
+    randomFactButton.addEventListener('click', showRandomFact);
 });
